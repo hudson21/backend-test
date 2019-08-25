@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql"
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 
 import TicketModel, { Ticket } from "../entities/ticket"
 
