@@ -6,4 +6,4 @@ rawGenresString?: string | null,
   delimiter = DEFAULT_GENRE_DELIMITER,
 ): string[] => (rawGenresString || DEFAULT_GENRE_STRING).split(delimiter).filter(Boolean)
 
-export default transformGenres
+export default transformGenres;

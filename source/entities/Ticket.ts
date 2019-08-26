@@ -1,5 +1,5 @@
-import { ObjectId } from "mongodb"
-import { Field, Float, Int, ObjectType } from "type-graphql"
+import { ObjectId } from "mongodb";
+import { Field, Float, Int, ObjectType } from "type-graphql";
 import {
   arrayProp as ArrayProperty,
   instanceMethod as InstanceMethod,
