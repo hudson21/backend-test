@@ -1,6 +1,6 @@
-import { ApolloServer } from "apollo-server"
-import { ObjectId } from "mongodb"
-import { connect } from "mongoose"
+import { ApolloServer } from "apollo-server";
+import { ObjectId } from "mongodb";
+import { connect } from "mongoose";
 import * as path from "path"
 import "reflect-metadata"
 import { buildSchema } from "type-graphql"
@@ -14,10 +14,7 @@ export const PORT = 4000
 
 const main = async () => {
   try {
-    await connect(
-      MONGODB_URI,
-      { useNewUrlParser: true },
-    )
+    await connect( MONGODB_URI,{ useNewUrlParser: true });
   } catch (mongoConnectError) {
     console.error(mongoConnectError)
   }
