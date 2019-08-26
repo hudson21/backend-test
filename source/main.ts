@@ -21,6 +21,7 @@ const main = async () => {
   } catch (mongoConnectError) {
     console.error(mongoConnectError)
   }
+  
   try {
     const schema = await buildSchema({
       resolvers,
@@ -36,4 +37,4 @@ const main = async () => {
   }
 }
 
-main()
+main();
