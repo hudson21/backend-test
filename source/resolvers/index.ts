@@ -1,3 +1,1 @@
-import { TicketResolver } from "./Ticket.resolver"
-
-export default [TicketResolver]
+export { TicketResolver } from "./Ticket.resolver";
