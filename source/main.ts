@@ -1,8 +1,8 @@
-import { ApolloServer } from "apollo-server";
-import { ObjectId } from "mongodb";
-import { connect } from "mongoose";
-import * as path from "path";
-import "reflect-metadata";
+import { ApolloServer } from "apollo-server"
+import { ObjectId } from "mongodb"
+import { connect } from "mongoose"
+import * as path from "path"
+import "reflect-metadata"
 import { buildSchema } from "type-graphql"
 
 import { ObjectIdScalar } from "./objectId.scalar"
