@@ -1,9 +1,11 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-
+import { ObjectId } from "mongodb";
 import TicketModel, { Ticket } from "../entities/ticket"
 
 import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput } from "./types/Ticket.input"
 import { fetch } from "apollo-server-env";
+
+const BASE_URL = "https://us-central1-bonsai-interview-endpoints.cloudfunctions.net/movieTickets";
 
 @Resolver(() => Ticket)
 export class TicketResolver {
@@ -33,32 +35,42 @@ export class TicketResolver {
     return ticket.saveFields()
   }
 
-  @Mutation()
+  @Mutation(() => [Ticket])
   public async saveTickets(@Arg("input") ticketInput: SaveTicketsInput): Promise<Ticket[]> {
-    let skip = ticketInput.skip;
+    let skip = ticketInput.skip || 0;
     let limit = ticketInput.limit;
+    let url = `${BASE_URL}?skip=${skip}&limit=${limit}`;
+    console.log("url", url);
 
-    if (!skip) {
-      skip = 0;
-    }
-
-    if (!limit) {
-      limit = 10;
-    }
-
-    fetch(`https://us-central1-bonsai-interview-endpoints.cloudfunctions.net/movieTickets?skip=${skip}&limit=${limit}`)
-      .then((response) => {
-        const tickets = new Array(response.json());
-        tickets.forEach(it => {
-          let ticket = new TicketModel(it);
-          ticket.saveFields();
-        })
+    //await TicketModel.deleteMany({});
+    // URL should be a constant
+    await fetch(url)
+      .then(response => response.json())
+      .then(tickets => {
+        tickets.map((it:any) => {
+          console.log("inserting", it);
+          const ticket = new TicketModel({
+            title: it.title,
+            genre: it.genre,
+            price: it.price,
+            inventory: it.inventory,
+            imageUrl: it.image,
+            date: it.date
+          })
+          ticket.saveFields()
+            .then((tick) => {
+              console.log("inserted", tick.title);
+            })
+            .catch((err) => {
+              console.log("error", err);
+            })
+        });
       })
       .catch(err => {
         throw new Error(err);
       })
     
-    const result = await TicketModel.find({})
+    const result = await TicketModel.find({}) 
 
     return result;
   }
