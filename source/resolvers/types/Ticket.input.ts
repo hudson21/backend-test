@@ -10,6 +10,16 @@ export class TicketInput {
 }
 
 @InputType()
+export class SaveTicketsInput {
+  @Field(() => Int)
+  skip: number
+
+  @Field(() => Int)
+  limit: number
+}
+
+
+@InputType()
 export class ListTicketsInput {
   @Field(() => Date)
   public cursor: Date
