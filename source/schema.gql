@@ -22,8 +22,14 @@ input ListTicketsInput {
   limit: Int!
 }
 
+input SaveTicketsInput {
+  skip: Int
+  limit: Int
+}
+
 type Mutation {
   addTicket(input: AddTicketInput!): Ticket!
+  saveTickets(input: SaveTicketsInput!): [Ticket!]!
 }
 
 """Mongo object id scalar type"""
