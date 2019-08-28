@@ -16,7 +16,9 @@ export async function listTickets(input: ListTicketsInput): Promise<Ticket[]> {
 }
 
 export async function listTicketsWithPagination(input: ListTicketsWithPagination): Promise<Ticket[]> {
-  const { limit, page } = input;
+  let limit = input.limit || 10;
+  let page = input.page || 0;
+  
   return TicketModel
     .find({})
     .sort({ date: 'desc' })
