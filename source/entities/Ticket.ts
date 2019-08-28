@@ -38,7 +38,7 @@ export class Ticket extends Typegoose {
 
   @Field()
   @Property({ required: true })
-  public imageUrl: string
+  public image: string
 
   @Field()
   @Property({ required: true })
@@ -47,14 +47,10 @@ export class Ticket extends Typegoose {
   @InstanceMethod
   public saveFields(this: InstanceType<Ticket>) {
     // Inventory should always be at least 0
-    this.inventory = Math.max(this.inventory || 0, 0)
-    /*if (this && Math.floor(Math.random() * 6) + 1 === 3) {
-      this.inventory = -1
-    }*/
+    this.inventory = Math.max(this.inventory || 0, 0);
     return this.save()
   }
 }
 
-export const TicketModel = new Ticket().getModelForClass(Ticket)
-
+export const TicketModel = new Ticket().getModelForClass(Ticket);
 export default TicketModel

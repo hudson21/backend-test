@@ -1,16 +1,16 @@
 import { ApolloServer } from "apollo-server";
 import { ObjectId } from "mongodb";
 import { connect } from "mongoose";
-import * as path from "path"
-import "reflect-metadata"
-import { buildSchema } from "type-graphql"
+import * as path from "path";
+import "reflect-metadata";
+import { buildSchema } from "type-graphql";
 
-import { ObjectIdScalar } from "./objectId.scalar"
-import resolvers from "./resolvers"
-import typegooseMiddleware from "./typegooseMiddleware"
+import { ObjectIdScalar } from "./objectId.scalar";
+import resolvers from "./resolvers";
+import typegooseMiddleware from "./typegooseMiddleware";
 
-export const MONGODB_URI = "mongodb://localhost:27017/bonsai-backend-test"
-export const PORT = 4000
+export const MONGODB_URI = "mongodb://localhost:27017/bonsai-backend-test";
+export const PORT = 4000;
 
 const main = async () => {
   try {

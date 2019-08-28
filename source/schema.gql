@@ -8,7 +8,7 @@ input AddTicketInput {
   genre: [String!]!
   price: Float!
   inventory: Int!
-  imageUrl: String!
+  image: String!
   date: DateTime!
 }
 
@@ -46,7 +46,7 @@ type Ticket {
   genre: [String!]!
   price: Float!
   inventory: Int!
-  imageUrl: String!
+  image: String!
   date: DateTime!
 }
 
