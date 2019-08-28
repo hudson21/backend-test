@@ -12,6 +12,11 @@ input AddTicketInput {
   date: DateTime!
 }
 
+input ListTicketsWithPagination {
+  page: Int!
+  limit: Int!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -38,6 +43,7 @@ scalar ObjectId
 type Query {
   ticket(input: TicketInput!): Ticket
   listTickets(input: ListTicketsInput!): [Ticket!]!
+  ListTicketsWithPagination(input: ListTicketsWithPagination): [Ticket!]!
 }
 
 type Ticket {

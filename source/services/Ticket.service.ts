@@ -1,15 +1,23 @@
 import { ObjectId } from "mongodb";
 import { fetch } from "apollo-server-env";
 import TicketModel, { Ticket } from "../entities/ticket";
-import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput } from "../resolvers/types/Ticket.input";
+import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput, ListTicketsWithPagination } from "../resolvers/types/Ticket.input";
 import { InputType } from "type-graphql";
 import transformGenres, { BASE_URL } from '../helpers/transformGenres';
 
-//We need to fix optimize one
+
 export async function listTickets(input: ListTicketsInput): Promise<Ticket[]> {
   const { limit, cursor } = input;
   return TicketModel.find({ date: { $lt: cursor.getTime() } })
     .sort({ date: 'desc' })
+    .limit(limit)
+}
+
+export async function listTicketsWithPagination(input: ListTicketsWithPagination): Promise<Ticket[]> {
+  const { limit, page } = input;
+  return TicketModel.find()
+    .sort({ date: 'desc' })
+    .skip((page - 1) * limit)
     .limit(limit)
 }
 

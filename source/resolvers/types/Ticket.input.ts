@@ -18,6 +18,15 @@ export class SaveTicketsInput {
   limit: number
 }
 
+@InputType()
+export class ListTicketsWithPagination {
+  @Field(() => Int)
+  page: number
+
+  @Field(() => Int)
+  limit: number
+}
+
 
 @InputType()
 export class ListTicketsInput {

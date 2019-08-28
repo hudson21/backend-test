@@ -2,8 +2,8 @@ import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { ObjectId } from "mongodb";
 import { Ticket } from "../entities/ticket";
 
-import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput } from "./types/Ticket.input";
-import { saveTickets, addTicket, ticket, listTickets } from '../services/Ticket.service';
+import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput, ListTicketsWithPagination } from "./types/Ticket.input";
+import { saveTickets, addTicket, ticket, listTickets, listTicketsWithPagination } from '../services/Ticket.service';
 
 @Resolver(() => Ticket)
 export class TicketResolver {
@@ -16,6 +16,11 @@ export class TicketResolver {
   @Query(() => [Ticket])
   public async listTickets(@Arg("input") ticketInput: ListTicketsInput): Promise<Ticket[]> {
     return listTickets(ticketInput);
+  }
+
+  @Query(() => [Ticket])
+  public async listTicketsWithPagination(@Arg("input") ticketInput: ListTicketsWithPagination): Promise<Ticket[]> {
+    return listTicketsWithPagination(ticketInput);
   }
 
   @Mutation(() => Ticket)
