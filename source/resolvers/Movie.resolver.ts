@@ -5,6 +5,8 @@ import { Ticket } from "../entities/ticket";
 import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput, ListTicketsWithPagination } from "./types/Ticket.input";
 import { saveTickets, addTicket, ticket, listTickets, listTicketsWithPagination } from '../services/Ticket.service';
 
+//encondeUri to use for the movies fetching
+
 @Resolver(() => Ticket)
 export class TicketResolver {
 

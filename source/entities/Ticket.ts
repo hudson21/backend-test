@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb";
+import { Movie } from './Movie';
 import { Field, Float, Int, ObjectType } from "type-graphql";
 import {
   arrayProp as ArrayProperty,
@@ -8,6 +9,7 @@ import {
   prop as Property,
   staticMethod as StaticMethod,
   Typegoose,
+  Ref
 } from "typegoose"
 
 @ObjectType()
@@ -44,9 +46,12 @@ export class Ticket extends Typegoose {
   @Property({ required: true })
   public date: Date
 
+  @Field(() => Movie, { nullable: true })
+  @Property({ ref: Movie, required: false })
+  public movie?: Ref<Movie>
+
   @InstanceMethod
   public saveFields(this: InstanceType<Ticket>) {
-    // Inventory should always be at least 0
     this.inventory = Math.max(this.inventory || 0, 0);
     return this.save()
   }
