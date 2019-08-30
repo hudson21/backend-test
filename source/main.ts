@@ -6,7 +6,8 @@ import "reflect-metadata";
 import { buildSchema } from "type-graphql";
 
 import { ObjectIdScalar } from "./objectId.scalar";
-import resolvers from "./resolvers";
+import { MovieResolver } from "./resolvers/Movie.resolver";
+import { TicketResolver } from './resolvers/Ticket.resolver';
 import typegooseMiddleware from "./typegooseMiddleware";
 import { PORT, DB_URL } from './helpers/constants';
 
@@ -19,7 +20,7 @@ const main = async () => {
   
   try {
     const schema = await buildSchema({
-      resolvers,
+      resolvers: [MovieResolver, TicketResolver],
       emitSchemaFile: path.resolve(__dirname, "schema.gql"),
       globalMiddlewares: [typegooseMiddleware],
       scalarsMap: [{ type: ObjectId, scalar: ObjectIdScalar }],

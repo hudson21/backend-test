@@ -1,9 +1,10 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver, FieldResolver, Root } from "type-graphql";
 import { ObjectId } from "mongodb";
 import { Ticket } from "../entities/ticket";
-
+import { Movie } from "../entities/Movie";
 import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput, ListTicketsWithPagination } from "./types/Ticket.input";
 import { saveTickets, addTicket, ticket, listTickets, listTicketsWithPagination } from '../services/Ticket.service';
+import * as movieService from '../services/Movie.service';
 
 @Resolver(() => Ticket)
 export class TicketResolver {
@@ -32,5 +33,10 @@ export class TicketResolver {
   public async saveTickets(@Arg("input") ticketInput: SaveTicketsInput): Promise<boolean> {
     await saveTickets(ticketInput);
     return true;
+  }
+
+  @FieldResolver()
+  public async movie(@Root() ticket: Ticket): Promise<Movie | null> {
+    return ticket.movie ? movieService.findMovieById(ticket.movie as ObjectId) : null
   }
 }

@@ -38,6 +38,10 @@ export async function addTicket(input: AddTicketInput): Promise<Ticket> {
   return ticket.saveFields();
 }
 
+export async function findTicketsByMovieId(movieId: ObjectId): Promise<Ticket[]> {
+  return TicketModel.find({ movie: movieId })
+}
+
 export async function saveTickets(input: SaveTicketsInput): Promise<void> {
   let skip = input.skip || 0;
   let limit = input.limit || 1000; 

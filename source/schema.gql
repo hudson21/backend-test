@@ -41,8 +41,8 @@ type Movie {
 
 type Mutation {
   addTicket(input: AddTicketInput!): Ticket!
-  saveTickets(input: SaveTicketsInput!): [Ticket!]!
-  saveMovies: [Movie!]!
+  saveTickets(input: SaveTicketsInput!): Boolean!
+  saveMovies: Boolean!
 }
 
 """Mongo object id scalar type"""

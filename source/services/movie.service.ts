@@ -5,12 +5,20 @@ import MovieModel, { Movie } from "../entities/Movie";
 import { MovieInput, SaveMoviesInput } from "../resolvers/types/Movie.input";
 import { BASE_OMDB_URL } from '../helpers/constants';
 
+export async function findMovieById(id: ObjectId): Promise<Movie> {
+  const movie = await MovieModel.findById(id);
+  if (!movie) {
+    throw new Error('No movie found!')
+  };
+  return movie;
+}
+
 
 export async function saveMovies(): Promise<void> {
 
   try {
     console.log("I am here");
-    await MovieModel.deleteMany({});
+    /*await MovieModel.deleteMany({});
 
     const tickets = await TicketModel.find({}).sort('_id');
 
@@ -30,7 +38,7 @@ export async function saveMovies(): Promise<void> {
         movie.tickets.push(ticket);
         await movie.save();
       }
-    });
+    });*/
   } catch(error) {
     throw new Error(error);
   }
