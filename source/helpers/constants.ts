@@ -1,2 +1,7 @@
-export const BASE_URL = "https://us-central1-bonsai-interview-endpoints.cloudfunctions.net/movieTickets";
-export const BASE_OMDB_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=55e5a17f";
+require('dotenv-safe').config();
+export const PORT = process.env.PORT || 4000;
+export const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/bonsai-backend-test';
+export const BASE_URL = process.env.BASE_URL || 'https://yts.lt';
+export const BASE_OMDB_URL = process.env.BASE_OMDB_URL || 'https://omdbapi.com';
+
+

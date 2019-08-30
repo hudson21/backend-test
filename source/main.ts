@@ -8,13 +8,11 @@ import { buildSchema } from "type-graphql";
 import { ObjectIdScalar } from "./objectId.scalar";
 import resolvers from "./resolvers";
 import typegooseMiddleware from "./typegooseMiddleware";
-
-export const MONGODB_URI = "mongodb://localhost:27017/bonsai-backend-test";
-export const PORT = 4000;
+import { PORT, DB_URL } from './helpers/constants';
 
 const main = async () => {
   try {
-    await connect( MONGODB_URI,{ useNewUrlParser: true });
+    await connect( DB_URL,{ useNewUrlParser: true });
   } catch (mongoConnectError) {
     console.error(mongoConnectError)
   }

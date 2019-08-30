@@ -10,7 +10,7 @@ import {
   staticMethod as StaticMethod,
   Typegoose,
   Ref
-} from "typegoose"
+} from "typegoose";
 
 @ObjectType()
 export class Ticket extends Typegoose {

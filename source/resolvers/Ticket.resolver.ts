@@ -28,8 +28,9 @@ export class TicketResolver {
     return addTicket(ticketInput);
   }
 
-  @Mutation(() => [Ticket])
-  public async saveTickets(@Arg("input") ticketInput: SaveTicketsInput): Promise<Ticket[]> {
-    return saveTickets(ticketInput);
+  @Mutation(() => Boolean)
+  public async saveTickets(@Arg("input") ticketInput: SaveTicketsInput): Promise<boolean> {
+    await saveTickets(ticketInput);
+    return true;
   }
 }
