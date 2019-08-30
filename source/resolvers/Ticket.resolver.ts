@@ -30,6 +30,6 @@ export class TicketResolver {
 
   @Mutation(() => [Ticket])
   public async saveTickets(@Arg("input") ticketInput: SaveTicketsInput): Promise<Ticket[]> {
-    return saveTickets(ticketInput);
+    return await saveTickets(ticketInput);
   }
 }

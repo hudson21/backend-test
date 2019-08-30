@@ -2,7 +2,6 @@ import { ObjectId } from "mongodb";
 import { fetch } from "apollo-server-env";
 import TicketModel, { Ticket } from "../entities/ticket";
 import { AddTicketInput, ListTicketsInput, TicketInput, SaveTicketsInput, ListTicketsWithPagination } from "../resolvers/types/Ticket.input";
-import { InputType } from "type-graphql";
 import transformGenres from '../helpers/transformGenres';
 import { BASE_URL } from '../helpers/constants';
 
@@ -63,7 +62,6 @@ export async function saveTickets(input: SaveTicketsInput): Promise<Ticket[]> {
     });
 
     return await TicketModel.find({});
-
   } catch (error) {
     throw new Error(error);
   }

@@ -8,7 +8,9 @@ import {
   prop as Property,
   staticMethod as StaticMethod,
   Typegoose,
-} from "typegoose"
+  Ref
+} from "typegoose";
+import { Movie } from './Movie';
 
 @ObjectType()
 export class Ticket extends Typegoose {
@@ -43,6 +45,10 @@ export class Ticket extends Typegoose {
   @Field()
   @Property({ required: true })
   public date: Date
+
+  @Field(() => Movie, { nullable: true })
+  @Property({ ref: Movie, required: false })
+  public movie?: Ref<Movie>
 
   @InstanceMethod
   public saveFields(this: InstanceType<Ticket>) {

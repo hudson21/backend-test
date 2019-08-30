@@ -12,11 +12,6 @@ input AddTicketInput {
   date: DateTime!
 }
 
-input ListTicketsWithPagination {
-  page: Int!
-  limit: Int!
-}
-
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -27,14 +22,27 @@ input ListTicketsInput {
   limit: Int!
 }
 
-input SaveTicketsInput {
-  skip: Int
-  limit: Int
+input ListTicketsWithPagination {
+  page: Int!
+  limit: Int!
+}
+
+type Movie {
+  _id: ObjectId!
+  title: String!
+  year: String!
+  rated: String!
+  released: String!
+  runtime: String!
+  genre: [String!]!
+  country: String!
+  tickets: [Ticket!]!
 }
 
 type Mutation {
   addTicket(input: AddTicketInput!): Ticket!
-  saveTickets(input: SaveTicketsInput!): [Ticket!]!
+  saveTickets(input: SaveTicketsInput!): Boolean!
+  saveMovies: Boolean!
 }
 
 """Mongo object id scalar type"""
@@ -43,7 +51,12 @@ scalar ObjectId
 type Query {
   ticket(input: TicketInput!): Ticket
   listTickets(input: ListTicketsInput!): [Ticket!]!
-  ListTicketsWithPagination(input: ListTicketsWithPagination): [Ticket!]!
+  listTicketsWithPagination(input: ListTicketsWithPagination!): [Ticket!]!
+}
+
+input SaveTicketsInput {
+  skip: Int!
+  limit: Int!
 }
 
 type Ticket {
@@ -54,6 +67,7 @@ type Ticket {
   inventory: Int!
   image: String!
   date: DateTime!
+  movie: Movie
 }
 
 input TicketInput {
